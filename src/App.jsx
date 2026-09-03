@@ -1,7 +1,11 @@
+import Navbar from './components/Navbar'
+
 function App() {
   return (
     <div className="min-h-screen bg-stone-50 text-stone-900">
-      <main className="flex min-h-screen items-center justify-center px-6">
+      <Navbar />
+
+      <main className="flex min-h-[calc(100vh-73px)] items-center justify-center px-6">
         <div className="text-center">
           <p className="mb-3 text-sm font-medium uppercase tracking-[0.3em] text-stone-500">
             Travel differently
