@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 const db = require("./config/db");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
@@ -28,27 +30,37 @@ app.get("/api/test-db", (req, res) => {
   });
 });
 
-app.post("/api/users", (req, res) => {
+app.post("/api/users", async (req, res) => {
   const { name, email, password } = req.body;
 
-  const sql = `
-    INSERT INTO users (name, email, password)
-    VALUES (?, ?, ?)
-  `;
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  db.query(sql, [name, email, password], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({
-        message: "Failed to create user",
+    const sql = `
+      INSERT INTO users (name, email, password)
+      VALUES (?, ?, ?)
+    `;
+
+    db.query(sql, [name, email, hashedPassword], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({
+          message: "Failed to create user",
+        });
+      }
+
+      res.status(201).json({
+        message: "User created successfully!",
+        userId: result.insertId,
       });
-    }
-
-    res.status(201).json({
-      message: "User created successfully!",
-      userId: result.insertId,
     });
-  });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to process password",
+    });
+  }
 });
 
 app.get("/api/users", (req, res) => {
