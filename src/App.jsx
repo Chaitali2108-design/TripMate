@@ -1,21 +1,42 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import Navbar from './components/Navbar'
-import Home from './pages/Home'
+import Landing from './pages/Landing'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Home from './pages/Home'
+
+function AppLayout({ children }) {
+  return (
+    <>
+      <Navbar />
+      {children}
+    </>
+  )
+}
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#f5f1e8] text-[#292722]">
-        <Navbar />
+      <Routes>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
+        {/* Public Pages */}
+        <Route path="/" element={<Landing />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* Application Pages */}
+        <Route
+          path="/home"
+          element={
+            <AppLayout>
+              <Home />
+            </AppLayout>
+          }
+        />
+
+
+      </Routes>
     </BrowserRouter>
   )
 }
