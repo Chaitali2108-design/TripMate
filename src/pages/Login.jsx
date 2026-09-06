@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -38,7 +40,11 @@ function Login() {
 
       setMessage('Login successful!')
 
-      console.log('Logged in user:', data.user)
+console.log('Logged in user:', data.user)
+
+setTimeout(() => {
+  navigate('/home')
+}, 800)
     } catch (error) {
       console.error(error)
       setMessage('Unable to connect to the server.')
