@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Register() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,11 +41,15 @@ function Register() {
 
       setMessage('Account created successfully!')
 
-      setFormData({
-        name: '',
-        email: '',
-        password: '',
-      })
+setFormData({
+  name: '',
+  email: '',
+  password: '',
+})
+
+setTimeout(() => {
+  navigate('/login')
+}, 800)
     } catch (error) {
       console.error(error)
       setMessage('Unable to connect to the server.')
