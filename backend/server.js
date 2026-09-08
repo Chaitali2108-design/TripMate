@@ -149,6 +149,36 @@ app.post("/api/login", (req, res) => {
   });
 });
 
+app.post("/api/trips", (req, res) => {
+  const { user_id, trip_name, destination, start_date, end_date, travelers } =
+    req.body;
+
+  const sql = `
+    INSERT INTO trips
+    (user_id, trip_name, destination, start_date, end_date, travelers)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
+
+  db.query(
+    sql,
+    [user_id, trip_name, destination, start_date, end_date, travelers],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+
+        return res.status(500).json({
+          message: "Failed to create trip",
+        });
+      }
+
+      res.status(201).json({
+        message: "Trip created successfully!",
+        tripId: result.insertId,
+      });
+    },
+  );
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
