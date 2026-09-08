@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Home() {
   return (
     <main className="min-h-screen bg-[#F7F3EC] px-6 py-10 lg:px-8">
@@ -23,10 +25,11 @@ function Home() {
         <section className="mt-10 grid gap-5 md:grid-cols-2">
 
           {/* Create Trip */}
-          <button
-            type="button"
-            className="group rounded-3xl bg-[#E8DED0] p-7 text-left text-[#292722] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-          >
+          <Link
+  to="/create-trip"
+  className="group rounded-3xl bg-[#E8DED0] p-7 text-left text-[#292722] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+>
+          
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-[#7A6F63]">
                 Start something new
@@ -49,7 +52,7 @@ function Home() {
             <span className="mt-6 inline-flex text-sm font-semibold text-[#95271D]">
               Create Trip →
             </span>
-          </button>
+          </Link>
 
           {/* Explore */}
           <button
@@ -187,12 +190,12 @@ function Home() {
               journey and keep everything organized with TripMate.
             </p>
 
-            <button
-              type="button"
-              className="mt-6 rounded-xl bg-[#95271D] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#7D2018] hover:shadow-lg"
-            >
-              Create Your First Trip
-            </button>
+            <Link
+  to="/create-trip"
+  className="mt-6 inline-flex rounded-xl bg-[#95271D] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#7D2018] hover:shadow-lg"
+>
+  Create Your First Trip
+</Link>
 
           </div>
 
