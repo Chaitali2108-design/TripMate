@@ -179,6 +179,36 @@ app.post("/api/trips", (req, res) => {
   );
 });
 
+app.get("/api/users/:userId/trips", (req, res) => {
+  const userId = req.params.userId;
+
+  const sql = `
+    SELECT
+      id,
+      trip_name,
+      destination,
+      start_date,
+      end_date,
+      travelers,
+      created_at
+    FROM trips
+    WHERE user_id = ?
+    ORDER BY start_date ASC
+  `;
+
+  db.query(sql, [userId], (err, results) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        message: "Failed to fetch trips",
+      });
+    }
+
+    res.json(results);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
