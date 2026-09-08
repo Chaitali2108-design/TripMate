@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 function Register() {
   const navigate = useNavigate()
@@ -149,9 +150,12 @@ setTimeout(() => {
 
         <p className="mt-6 text-center text-sm text-[#716B64]">
           Already have an account?{' '}
-          <span className="font-semibold text-[#95271D]">
-            Sign in
-          </span>
+          <Link
+  to="/login"
+  className="font-semibold text-[#95271D] hover:underline"
+>
+  Sign in
+</Link>
         </p>
 
       </div>
