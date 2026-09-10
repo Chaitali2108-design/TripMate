@@ -22,7 +22,7 @@ function Navbar() {
         {/* Navigation */}
         <div className="hidden items-center gap-8 md:flex">
           <Link
-            to="/"
+            to="/home"
             className="text-sm font-medium text-[#292722] transition-colors duration-300 hover:text-[#766b5a]"
           >
             Home
