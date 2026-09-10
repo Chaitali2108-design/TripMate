@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function CreateTrip() {
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     trip_name: '',
     destination: '',
@@ -57,6 +60,10 @@ function CreateTrip() {
         end_date: '',
         travelers: '1',
       })
+
+      setTimeout(() => {
+      navigate('/trips')
+      }, 700)
     } catch (error) {
       console.error('Error creating trip:', error)
       setMessage('Unable to connect to the server.')
