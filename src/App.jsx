@@ -5,6 +5,7 @@ import Landing from './pages/Landing'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Home from './pages/Home'
+import Trips from './pages/Trips'
 import CreateTrip from './pages/CreateTrip'
 
 function AppLayout({ children }) {
@@ -40,6 +41,15 @@ function App() {
           element={
             <AppLayout>
               <Home />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/trips"
+          element={
+            <AppLayout>
+              <Trips />
             </AppLayout>
           }
         />
