@@ -209,6 +209,42 @@ app.get("/api/users/:userId/trips", (req, res) => {
   });
 });
 
+app.get("/api/trips/:tripId", (req, res) => {
+  const tripId = req.params.tripId;
+
+  const sql = `
+    SELECT
+      id,
+      user_id,
+      trip_name,
+      destination,
+      start_date,
+      end_date,
+      travelers,
+      created_at
+    FROM trips
+    WHERE id = ?
+  `;
+
+  db.query(sql, [tripId], (err, results) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        message: "Failed to fetch trip",
+      });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({
+        message: "Trip not found",
+      });
+    }
+
+    res.json(results[0]);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
