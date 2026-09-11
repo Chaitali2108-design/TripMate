@@ -245,6 +245,47 @@ app.get("/api/trips/:tripId", (req, res) => {
   });
 });
 
+app.put("/api/trips/:tripId", (req, res) => {
+  const tripId = req.params.tripId;
+
+  const { trip_name, destination, start_date, end_date, travelers } = req.body;
+
+  const sql = `
+    UPDATE trips
+    SET
+      trip_name = ?,
+      destination = ?,
+      start_date = ?,
+      end_date = ?,
+      travelers = ?
+    WHERE id = ?
+  `;
+
+  db.query(
+    sql,
+    [trip_name, destination, start_date, end_date, travelers, tripId],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+
+        return res.status(500).json({
+          message: "Failed to update trip",
+        });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({
+          message: "Trip not found",
+        });
+      }
+
+      res.json({
+        message: "Trip updated successfully!",
+      });
+    },
+  );
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
