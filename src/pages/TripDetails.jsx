@@ -1,6 +1,78 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
 function TripDetails() {
+  const { tripId } = useParams()
+
+  const [trip, setTrip] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchTrip = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/trips/${tripId}`
+        )
+
+        const data = await response.json()
+
+        if (!response.ok) {
+          console.error(data)
+          return
+        }
+
+        setTrip(data)
+      } catch (error) {
+        console.error('Error fetching trip:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchTrip()
+  }, [tripId])
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    })
+  }
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-[#F7F3EC] px-6 py-10 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm text-[#6F6A61]">
+            Loading trip...
+          </p>
+        </div>
+      </main>
+    )
+  }
+
+  if (!trip) {
+    return (
+      <main className="min-h-screen bg-[#F7F3EC] px-6 py-10 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+
+          <Link
+            to="/trips"
+            className="text-sm font-medium text-[#BC4F4F] hover:text-[#A94040]"
+          >
+            ← Back to My Trips
+          </Link>
+
+          <h1 className="mt-8 text-3xl font-semibold text-[#292722]">
+            Trip not found
+          </h1>
+
+        </div>
+      </main>
+    )
+  }
+
   return (
     <main className="min-h-screen bg-[#F7F3EC] px-6 py-10 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -21,11 +93,11 @@ function TripDetails() {
           </p>
 
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-[#292722] sm:text-5xl">
-            Goa Beach Escape
+            {trip.trip_name}
           </h1>
 
           <p className="mt-3 text-base text-[#6F6A61]">
-            Goa, India
+            {trip.destination}
           </p>
 
         </section>
@@ -39,7 +111,7 @@ function TripDetails() {
             </p>
 
             <p className="mt-3 text-lg font-semibold text-[#292722]">
-              10 Nov 2026
+              {formatDate(trip.start_date)}
             </p>
           </div>
 
@@ -49,7 +121,7 @@ function TripDetails() {
             </p>
 
             <p className="mt-3 text-lg font-semibold text-[#292722]">
-              15 Nov 2026
+              {formatDate(trip.end_date)}
             </p>
           </div>
 
@@ -59,13 +131,14 @@ function TripDetails() {
             </p>
 
             <p className="mt-3 text-lg font-semibold text-[#292722]">
-              3 Travelers
+              {trip.travelers}{' '}
+              {trip.travelers === 1 ? 'Traveler' : 'Travelers'}
             </p>
           </div>
 
         </section>
 
-        {/* Coming Soon */}
+        {/* Journey */}
         <section className="mt-8 rounded-3xl border border-[#DED5C9] bg-white p-8 sm:p-10">
 
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#BC4F4F]">
