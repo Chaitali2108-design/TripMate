@@ -144,12 +144,12 @@ function Trips() {
 
                   <div className="mt-6 border-t border-[#EEE9E1] pt-5">
 
-                    <button
-                      type="button"
-                      className="text-sm font-semibold text-[#292722] transition-colors hover:text-[#95271D]"
-                    >
-                      View Trip →
-                    </button>
+                    <Link
+  to={`/trips/${trip.id}`}
+  className="text-sm font-semibold text-[#BC4F4F] transition-colors hover:text-[#A94040]"
+>
+  View Trip →
+</Link>
 
                   </div>
 
