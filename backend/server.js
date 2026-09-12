@@ -315,6 +315,37 @@ app.delete("/api/trips/:tripId", (req, res) => {
   });
 });
 
+app.post("/api/trips/:tripId/destinations", (req, res) => {
+  const tripId = req.params.tripId;
+
+  const { place_name, description, visit_date } = req.body;
+
+  const sql = `
+    INSERT INTO destinations
+    (trip_id, place_name, description, visit_date)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  db.query(
+    sql,
+    [tripId, place_name, description, visit_date],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+
+        return res.status(500).json({
+          message: "Failed to add destination",
+        });
+      }
+
+      res.status(201).json({
+        message: "Destination added successfully!",
+        destinationId: result.insertId,
+      });
+    },
+  );
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
