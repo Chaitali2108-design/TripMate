@@ -86,21 +86,28 @@ function TripDetails() {
         </Link>
 
         {/* Header */}
-        <section className="mt-8">
+        <section className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+  <div>
+    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#BC4F4F]">
+      Trip Details
+    </p>
 
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#BC4F4F]">
-            Trip Details
-          </p>
+    <h1 className="mt-3 text-4xl font-semibold tracking-tight text-[#292722] sm:text-5xl">
+      {trip.trip_name}
+    </h1>
 
-          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-[#292722] sm:text-5xl">
-            {trip.trip_name}
-          </h1>
+    <p className="mt-3 text-base text-[#6F6A61]">
+      {trip.destination}
+    </p>
+  </div>
 
-          <p className="mt-3 text-base text-[#6F6A61]">
-            {trip.destination}
-          </p>
-
-        </section>
+  <Link
+    to={`/trips/${tripId}/edit`}
+    className="inline-flex w-fit rounded-xl bg-[#BC4F4F] px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#A94040] hover:shadow-lg"
+  >
+    Edit Trip
+  </Link>
+</section>
 
         {/* Overview */}
         <section className="mt-10 grid gap-5 sm:grid-cols-3">
