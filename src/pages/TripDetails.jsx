@@ -1,8 +1,39 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 function TripDetails() {
   const { tripId } = useParams()
+  const navigate = useNavigate()
+
+  const handleDelete = async () => {
+  const confirmed = window.confirm(
+    'Are you sure you want to delete this trip?'
+  )
+
+  if (!confirmed) {
+    return
+  }
+
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/trips/${tripId}`,
+      {
+        method: 'DELETE',
+      }
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      console.error(data)
+      return
+    }
+
+    navigate('/trips')
+  } catch (error) {
+    console.error('Error deleting trip:', error)
+  }
+}
 
   const [trip, setTrip] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -101,12 +132,22 @@ function TripDetails() {
     </p>
   </div>
 
+<div className="flex flex-wrap gap-3">
   <Link
     to={`/trips/${tripId}/edit`}
     className="inline-flex w-fit rounded-xl bg-[#BC4F4F] px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#A94040] hover:shadow-lg"
   >
     Edit Trip
   </Link>
+
+  <button
+    type="button"
+    onClick={handleDelete}
+    className="inline-flex w-fit rounded-xl border border-[#C9A9A5] bg-white px-5 py-3 text-sm font-semibold text-[#8B3A32] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8B3A32] hover:bg-[#FBF3F1]"
+  >
+    Delete Trip
+  </button>
+</div>
 </section>
 
         {/* Overview */}
