@@ -35,9 +35,72 @@ function TripDetails() {
   }
 }
 
+const handleDestinationChange = (event) => {
+  const { name, value } = event.target
+
+  setDestinationForm({
+    ...destinationForm,
+    [name]: value,
+  })
+}
+
+const handleAddDestination = async (event) => {
+  event.preventDefault()
+
+  setAddingDestination(true)
+
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/trips/${tripId}/destinations`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(destinationForm),
+      }
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      console.error(data)
+      return
+    }
+
+    const destinationsResponse = await fetch(
+      `http://localhost:5000/api/trips/${tripId}/destinations`
+    )
+
+    const destinationsData = await destinationsResponse.json()
+
+    if (destinationsResponse.ok) {
+      setDestinations(destinationsData)
+    }
+
+    setDestinationForm({
+      place_name: '',
+      description: '',
+      visit_date: '',
+    })
+  } catch (error) {
+    console.error('Error adding destination:', error)
+  } finally {
+    setAddingDestination(false)
+  }
+}
+
 const [trip, setTrip] = useState(null)
 const [destinations, setDestinations] = useState([])
 const [loading, setLoading] = useState(true)
+
+const [destinationForm, setDestinationForm] = useState({
+  place_name: '',
+  description: '',
+  visit_date: '',
+})
+
+const [addingDestination, setAddingDestination] = useState(false)
 
   useEffect(() => {
     const fetchTrip = async () => {
