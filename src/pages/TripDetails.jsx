@@ -35,8 +35,9 @@ function TripDetails() {
   }
 }
 
-  const [trip, setTrip] = useState(null)
-  const [loading, setLoading] = useState(true)
+const [trip, setTrip] = useState(null)
+const [destinations, setDestinations] = useState([])
+const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -53,6 +54,15 @@ function TripDetails() {
         }
 
         setTrip(data)
+        const destinationsResponse = await fetch(
+  `http://localhost:5000/api/trips/${tripId}/destinations`
+)
+
+const destinationsData = await destinationsResponse.json()
+
+if (destinationsResponse.ok) {
+  setDestinations(destinationsData)
+}
       } catch (error) {
         console.error('Error fetching trip:', error)
       } finally {
@@ -187,22 +197,69 @@ function TripDetails() {
         </section>
 
         {/* Journey */}
-        <section className="mt-8 rounded-3xl border border-[#DED5C9] bg-white p-8 sm:p-10">
+<section className="mt-8 rounded-3xl border border-[#DED5C9] bg-white p-8 sm:p-10">
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#BC4F4F]">
+        Places to explore
+      </p>
 
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#BC4F4F]">
-            Your journey
+      <h2 className="mt-3 text-2xl font-semibold text-[#292722]">
+        Destinations
+      </h2>
+
+      <p className="mt-2 text-sm leading-6 text-[#6F6A61]">
+        Keep track of the places you want to visit during this journey.
+      </p>
+    </div>
+
+    <span className="text-sm font-medium text-[#8A857C]">
+      {destinations.length}{' '}
+      {destinations.length === 1 ? 'place' : 'places'}
+    </span>
+  </div>
+
+  {destinations.length > 0 ? (
+    <div className="mt-8 grid gap-4 sm:grid-cols-2">
+      {destinations.map((destination) => (
+        <article
+          key={destination.id}
+          className="rounded-2xl border border-[#E6DED3] bg-[#FCFAF7] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+        >
+          <p className="text-xs font-semibold uppercase tracking-wider text-[#8A857C]">
+            Visit
           </p>
 
-          <h2 className="mt-3 text-2xl font-semibold text-[#292722]">
-            Plan the details of your trip
-          </h2>
+          <h3 className="mt-2 text-lg font-semibold text-[#292722]">
+            {destination.place_name}
+          </h3>
 
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#6F6A61]">
-            Destinations, activities, itinerary, expenses, and other
-            travel details will be organized here.
-          </p>
+          {destination.description && (
+            <p className="mt-2 text-sm leading-6 text-[#6F6A61]">
+              {destination.description}
+            </p>
+          )}
 
-        </section>
+          {destination.visit_date && (
+            <p className="mt-4 text-sm font-medium text-[#BC4F4F]">
+              {formatDate(destination.visit_date)}
+            </p>
+          )}
+        </article>
+      ))}
+    </div>
+  ) : (
+    <div className="mt-8 rounded-2xl border border-dashed border-[#DED5C9] bg-[#FCFAF7] px-6 py-10 text-center">
+      <p className="text-sm font-medium text-[#292722]">
+        No destinations added yet.
+      </p>
+
+      <p className="mt-2 text-sm text-[#8A857C]">
+        Add places to start building your journey.
+      </p>
+    </div>
+  )}
+</section>
 
       </div>
     </main>
