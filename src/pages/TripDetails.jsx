@@ -282,6 +282,70 @@ if (destinationsResponse.ok) {
     </span>
   </div>
 
+  <form
+  onSubmit={handleAddDestination}
+  className="mt-8 rounded-2xl border border-[#E6DED3] bg-[#FCFAF7] p-5"
+>
+  <div className="grid gap-5 sm:grid-cols-2">
+
+    <div>
+      <label className="mb-2 block text-sm font-medium text-[#292722]">
+        Place Name
+      </label>
+
+      <input
+        type="text"
+        name="place_name"
+        value={destinationForm.place_name}
+        onChange={handleDestinationChange}
+        placeholder="e.g. Baga Beach"
+        required
+        className="h-11 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#BC4F4F] focus:ring-2 focus:ring-[#BC4F4F]/10"
+      />
+    </div>
+
+    <div>
+      <label className="mb-2 block text-sm font-medium text-[#292722]">
+        Visit Date
+      </label>
+
+      <input
+        type="date"
+        name="visit_date"
+        value={destinationForm.visit_date}
+        onChange={handleDestinationChange}
+        className="h-11 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#BC4F4F] focus:ring-2 focus:ring-[#BC4F4F]/10"
+      />
+    </div>
+
+  </div>
+
+  <div className="mt-5">
+    <label className="mb-2 block text-sm font-medium text-[#292722]">
+      Description
+    </label>
+
+    <textarea
+      name="description"
+      value={destinationForm.description}
+      onChange={handleDestinationChange}
+      placeholder="Add a short note about this place..."
+      rows="3"
+      className="w-full resize-none rounded-xl border border-[#DED5C9] bg-white px-4 py-3 text-sm text-[#292722] outline-none transition focus:border-[#BC4F4F] focus:ring-2 focus:ring-[#BC4F4F]/10"
+    />
+  </div>
+
+  <div className="mt-5 flex justify-end">
+    <button
+      type="submit"
+      disabled={addingDestination}
+      className="rounded-xl bg-[#BC4F4F] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#A94040] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      {addingDestination ? 'Adding...' : '+ Add Destination'}
+    </button>
+  </div>
+</form>
+
   {destinations.length > 0 ? (
     <div className="mt-8 grid gap-4 sm:grid-cols-2">
       {destinations.map((destination) => (
