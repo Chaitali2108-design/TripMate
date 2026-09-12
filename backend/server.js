@@ -374,6 +374,35 @@ app.get("/api/trips/:tripId/destinations", (req, res) => {
   });
 });
 
+app.delete("/api/destinations/:destinationId", (req, res) => {
+  const destinationId = req.params.destinationId;
+
+  const sql = `
+    DELETE FROM destinations
+    WHERE id = ?
+  `;
+
+  db.query(sql, [destinationId], (err, result) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        message: "Failed to delete destination",
+      });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        message: "Destination not found",
+      });
+    }
+
+    res.json({
+      message: "Destination deleted successfully!",
+    });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
