@@ -346,6 +346,34 @@ app.post("/api/trips/:tripId/destinations", (req, res) => {
   );
 });
 
+app.get("/api/trips/:tripId/destinations", (req, res) => {
+  const tripId = req.params.tripId;
+
+  const sql = `
+    SELECT
+      id,
+      place_name,
+      description,
+      visit_date,
+      created_at
+    FROM destinations
+    WHERE trip_id = ?
+    ORDER BY visit_date ASC
+  `;
+
+  db.query(sql, [tripId], (err, results) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        message: "Failed to fetch destinations",
+      });
+    }
+
+    res.json(results);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
