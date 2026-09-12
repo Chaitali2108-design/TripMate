@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Trips from './pages/Trips'
 import CreateTrip from './pages/CreateTrip'
 import TripDetails from './pages/TripDetails'
+import EditTrip from './pages/EditTrip'
 
 function AppLayout({ children }) {
   return (
@@ -60,6 +61,15 @@ function App() {
   element={
     <AppLayout>
       <TripDetails />
+    </AppLayout>
+  }
+/>
+
+<Route
+  path="/trips/:tripId/edit"
+  element={
+    <AppLayout>
+      <EditTrip />
     </AppLayout>
   }
 />
