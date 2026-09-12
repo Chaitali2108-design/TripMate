@@ -286,6 +286,35 @@ app.put("/api/trips/:tripId", (req, res) => {
   );
 });
 
+app.delete("/api/trips/:tripId", (req, res) => {
+  const tripId = req.params.tripId;
+
+  const sql = `
+    DELETE FROM trips
+    WHERE id = ?
+  `;
+
+  db.query(sql, [tripId], (err, result) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        message: "Failed to delete trip",
+      });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        message: "Trip not found",
+      });
+    }
+
+    res.json({
+      message: "Trip deleted successfully!",
+    });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
