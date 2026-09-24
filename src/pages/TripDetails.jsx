@@ -44,6 +44,40 @@ const handleDestinationChange = (event) => {
   })
 }
 
+const handleDeleteDestination = async (destinationId) => {
+  const confirmed = window.confirm(
+    'Are you sure you want to delete this destination?'
+  )
+
+  if (!confirmed) {
+    return
+  }
+
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/destinations/${destinationId}`,
+      {
+        method: 'DELETE',
+      }
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      console.error(data)
+      return
+    }
+
+    setDestinations(
+      destinations.filter(
+        (destination) => destination.id !== destinationId
+      )
+    )
+  } catch (error) {
+    console.error('Error deleting destination:', error)
+  }
+}
+
 const handleAddDestination = async (event) => {
   event.preventDefault()
 
@@ -372,6 +406,14 @@ if (destinationsResponse.ok) {
               {formatDate(destination.visit_date)}
             </p>
           )}
+
+          <button
+  type="button"
+  onClick={() => handleDeleteDestination(destination.id)}
+  className="mt-5 text-sm font-semibold text-[#8B3A32] transition-colors hover:text-[#6F2D27]"
+>
+  Delete Destination
+</button>
         </article>
       ))}
     </div>
