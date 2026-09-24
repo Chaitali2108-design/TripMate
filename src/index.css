@@ -10,7 +10,12 @@ html {
 
 body {
   margin: 0;
-  background: #f5f1e8;
+  background: linear-gradient(
+    to top left,
+    rgba(17, 138, 178, 0.20),
+    rgba(17, 138, 178, 0.08) 45%,
+    #f7f6f2 100%
+  );
   color: #292722;
   font-family: Arial, Helvetica, sans-serif;
 }
