@@ -96,43 +96,44 @@ function CreateTrip() {
           className="mt-10 rounded-3xl border border-[#DED5C9] bg-[#FCFAF7] p-7 shadow-[0_20px_60px_rgba(41,39,34,0.08)] sm:p-9"
         >
 
-          {/* Trip Name */}
-          <div>
-            <label className="mb-2 block text-sm font-medium text-[#292722]">
-              Trip Name
-            </label>
+          {/* Form Grid */}
+          <div className="grid gap-6 sm:grid-cols-2">
 
-            <input
-              type="text"
-              name="trip_name"
-              value={formData.trip_name}
-              onChange={handleChange}
-              placeholder="e.g. Japan Adventure"
-              required
-              className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
-            />
-          </div>
+            {/* Trip Name */}
+            <div className="sm:col-span-2">
+              <label className="mb-2 block text-sm font-medium text-[#292722]">
+                Trip Name
+              </label>
 
-          {/* Destination */}
-          <div className="mt-6">
-            <label className="mb-2 block text-sm font-medium text-[#292722]">
-              Destination
-            </label>
+              <input
+                type="text"
+                name="trip_name"
+                value={formData.trip_name}
+                onChange={handleChange}
+                placeholder="e.g. Japan Adventure"
+                required
+                className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
+              />
+            </div>
 
-            <input
-              type="text"
-              name="destination"
-              value={formData.destination}
-              onChange={handleChange}
-              placeholder="e.g. Kyoto, Japan"
-              required
-              className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
-            />
-          </div>
+            {/* Destination */}
+            <div className="sm:col-span-2">
+              <label className="mb-2 block text-sm font-medium text-[#292722]">
+                Destination
+              </label>
 
-          {/* Dates */}
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
+              <input
+                type="text"
+                name="destination"
+                value={formData.destination}
+                onChange={handleChange}
+                placeholder="e.g. Kyoto, Japan"
+                required
+                className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
+              />
+            </div>
 
+            {/* Start Date */}
             <div>
               <label className="mb-2 block text-sm font-medium text-[#292722]">
                 Start Date
@@ -148,6 +149,7 @@ function CreateTrip() {
               />
             </div>
 
+            {/* End Date */}
             <div>
               <label className="mb-2 block text-sm font-medium text-[#292722]">
                 End Date
@@ -163,27 +165,27 @@ function CreateTrip() {
               />
             </div>
 
-          </div>
+            {/* Travelers */}
+            <div className="sm:col-span-2">
+              <label className="mb-2 block text-sm font-medium text-[#292722]">
+                Travelers
+              </label>
 
-          {/* Travelers */}
-          <div className="mt-6">
-            <label className="mb-2 block text-sm font-medium text-[#292722]">
-              Travelers
-            </label>
+              <select
+                name="travelers"
+                value={formData.travelers}
+                onChange={handleChange}
+                className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
+              >
+                <option value="1">1 Traveler</option>
+                <option value="2">2 Travelers</option>
+                <option value="3">3 Travelers</option>
+                <option value="4">4 Travelers</option>
+                <option value="5">5 Travelers</option>
+                <option value="6">6+ Travelers</option>
+              </select>
+            </div>
 
-            <select
-              name="travelers"
-              value={formData.travelers}
-              onChange={handleChange}
-              className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
-            >
-              <option value="1">1 Traveler</option>
-              <option value="2">2 Travelers</option>
-              <option value="3">3 Travelers</option>
-              <option value="4">4 Travelers</option>
-              <option value="5">5 Travelers</option>
-              <option value="6">6+ Travelers</option>
-            </select>
           </div>
 
           {/* Message */}
@@ -194,7 +196,7 @@ function CreateTrip() {
           )}
 
           {/* Actions */}
-          <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+          <div className="mt-8 flex flex-col-reverse gap-3 border-t border-[#E6E0D8] pt-6 sm:flex-row sm:justify-end">
 
             <button
               type="button"
