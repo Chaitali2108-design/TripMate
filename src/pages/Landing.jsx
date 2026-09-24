@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Landing() {
   return (
     <main className="bg-[#F7F6F2] text-[#24231F]">
@@ -9,7 +11,7 @@ function Landing() {
           {/* Content */}
           <div className="max-w-xl">
 
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#95271D]">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#118AB2]">
               Your journey, your way
             </p>
 
@@ -29,19 +31,19 @@ function Landing() {
             {/* Actions */}
             <div className="mt-9 flex flex-wrap items-center gap-4">
 
-              <a
-                href="/register"
-                className="rounded-full bg-[#24231F] px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#34322D] hover:shadow-lg"
+              <Link
+                to="/register"
+                className="rounded-full bg-[#118AB2] px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#0D6F91] hover:shadow-lg"
               >
                 Start Planning
-              </a>
+              </Link>
 
-              <a
-                href="/login"
-                className="rounded-full border border-[#D8D5CE] bg-white px-7 py-3.5 text-sm font-semibold text-[#24231F] transition-all duration-300 hover:-translate-y-1 hover:border-[#95271D] hover:shadow-md"
+              <Link
+                to="/login"
+                className="rounded-full border border-[#D8D5CE] bg-white px-7 py-3.5 text-sm font-semibold text-[#24231F] transition-all duration-300 hover:-translate-y-1 hover:border-[#118AB2] hover:text-[#118AB2] hover:shadow-md"
               >
                 Sign In
-              </a>
+              </Link>
 
             </div>
 
@@ -81,7 +83,7 @@ function Landing() {
                   Upcoming trip
                 </p>
 
-                <span className="text-[#95271D]">
+                <span className="text-[#118AB2]">
                   ●
                 </span>
               </div>
@@ -95,7 +97,7 @@ function Landing() {
               </p>
 
               <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-[#ECE9E2]">
-                <div className="h-full w-2/3 rounded-full bg-[#8A857C]" />
+                <div className="h-full w-2/3 rounded-full bg-[#118AB2]" />
               </div>
 
               <p className="mt-2 text-xs text-[#8A857C]">
@@ -109,13 +111,13 @@ function Landing() {
         </div>
       </section>
 
-
       {/* Features */}
       <section className="border-t border-[#E5E2DB] bg-white px-6 py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
 
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#95271D]">
+
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#118AB2]">
               Everything in one place
             </p>
 
@@ -129,12 +131,17 @@ function Landing() {
               Plan every part of your journey without jumping between
               different apps and notes.
             </p>
+
           </div>
 
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
 
+            {/* Feature 1 */}
             <div className="rounded-3xl border border-[#E5E2DB] bg-[#F7F6F2] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <span className="text-2xl">✦</span>
+
+              <span className="text-2xl text-[#118AB2]">
+                ✦
+              </span>
 
               <h3 className="mt-8 text-lg font-semibold">
                 Plan Trips
@@ -143,10 +150,15 @@ function Landing() {
               <p className="mt-3 text-sm leading-6 text-[#706C65]">
                 Create and organize complete journeys around your plans.
               </p>
+
             </div>
 
+            {/* Feature 2 */}
             <div className="rounded-3xl border border-[#E5E2DB] bg-[#F7F6F2] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <span className="text-2xl">◫</span>
+
+              <span className="text-2xl text-[#118AB2]">
+                ◫
+              </span>
 
               <h3 className="mt-8 text-lg font-semibold">
                 Build Itineraries
@@ -155,10 +167,15 @@ function Landing() {
               <p className="mt-3 text-sm leading-6 text-[#706C65]">
                 Keep destinations, activities, dates, and plans organized.
               </p>
+
             </div>
 
+            {/* Feature 3 */}
             <div className="rounded-3xl border border-[#E5E2DB] bg-[#F7F6F2] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <span className="text-2xl">₹</span>
+
+              <span className="text-2xl text-[#118AB2]">
+                ₹
+              </span>
 
               <h3 className="mt-8 text-lg font-semibold">
                 Track Expenses
@@ -167,10 +184,15 @@ function Landing() {
               <p className="mt-3 text-sm leading-6 text-[#706C65]">
                 Keep your travel spending visible and under control.
               </p>
+
             </div>
 
+            {/* Feature 4 */}
             <div className="rounded-3xl border border-[#E5E2DB] bg-[#F7F6F2] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <span className="text-2xl">↗</span>
+
+              <span className="text-2xl text-[#118AB2]">
+                ↗
+              </span>
 
               <h3 className="mt-8 text-lg font-semibold">
                 Travel Together
@@ -179,6 +201,7 @@ function Landing() {
               <p className="mt-3 text-sm leading-6 text-[#706C65]">
                 Collaborate with your travel companions and plan together.
               </p>
+
             </div>
 
           </div>
@@ -186,12 +209,11 @@ function Landing() {
         </div>
       </section>
 
-
       {/* Final CTA */}
-      <section className="bg-[#24231F] px-6 py-24 text-white lg:px-8">
+      <section className="bg-[#E6F5F8] px-6 py-24 text-[#24231F] lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
 
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#C9A79E]">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#118AB2]">
             Your next adventure
           </p>
 
@@ -201,17 +223,17 @@ function Landing() {
             Start living them.
           </h2>
 
-          <p className="mx-auto mt-5 max-w-xl leading-7 text-[#B8B4AC]">
+          <p className="mx-auto mt-5 max-w-xl leading-7 text-[#706C65]">
             Create your TripMate account and turn your next destination
             into a journey worth remembering.
           </p>
 
-          <a
-            href="/register"
-            className="mt-9 inline-flex rounded-full bg-[#95271D] px-8 py-4 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#AA3024] hover:shadow-xl"
+          <Link
+            to="/register"
+            className="mt-9 inline-flex rounded-full bg-[#118AB2] px-8 py-4 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#0D6F91] hover:shadow-xl"
           >
             Create Your TripMate Account
-          </a>
+          </Link>
 
         </div>
       </section>
