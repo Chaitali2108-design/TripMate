@@ -62,7 +62,7 @@ function CreateTrip() {
       })
 
       setTimeout(() => {
-      navigate('/trips')
+        navigate('/trips')
       }, 700)
     } catch (error) {
       console.error('Error creating trip:', error)
@@ -71,12 +71,12 @@ function CreateTrip() {
   }
 
   return (
-    <main className="min-h-screen bg-[#F7F3EC] px-6 py-10 lg:px-8">
+    <main className="min-h-screen bg-transparent px-6 py-10 lg:px-8">
       <div className="mx-auto max-w-4xl">
 
         {/* Header */}
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#95271D]">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#118AB2]">
             Plan a journey
           </p>
 
@@ -93,7 +93,7 @@ function CreateTrip() {
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="mt-10 rounded-3xl border border-[#DED5C9] bg-white p-7 shadow-[0_20px_60px_rgba(41,39,34,0.06)] sm:p-9"
+          className="mt-10 rounded-3xl border border-[#DED5C9] bg-[#FCFAF7] p-7 shadow-[0_20px_60px_rgba(41,39,34,0.08)] sm:p-9"
         >
 
           {/* Trip Name */}
@@ -109,7 +109,7 @@ function CreateTrip() {
               onChange={handleChange}
               placeholder="e.g. Japan Adventure"
               required
-              className="h-12 w-full rounded-xl border border-[#DED5C9] bg-[#FCFAF7] px-4 text-sm text-[#292722] outline-none transition focus:border-[#95271D] focus:ring-2 focus:ring-[#95271D]/10"
+              className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
             />
           </div>
 
@@ -126,7 +126,7 @@ function CreateTrip() {
               onChange={handleChange}
               placeholder="e.g. Kyoto, Japan"
               required
-              className="h-12 w-full rounded-xl border border-[#DED5C9] bg-[#FCFAF7] px-4 text-sm text-[#292722] outline-none transition focus:border-[#95271D] focus:ring-2 focus:ring-[#95271D]/10"
+              className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
             />
           </div>
 
@@ -144,7 +144,7 @@ function CreateTrip() {
                 value={formData.start_date}
                 onChange={handleChange}
                 required
-                className="h-12 w-full rounded-xl border border-[#DED5C9] bg-[#FCFAF7] px-4 text-sm text-[#292722] outline-none transition focus:border-[#95271D] focus:ring-2 focus:ring-[#95271D]/10"
+                className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
               />
             </div>
 
@@ -159,7 +159,7 @@ function CreateTrip() {
                 value={formData.end_date}
                 onChange={handleChange}
                 required
-                className="h-12 w-full rounded-xl border border-[#DED5C9] bg-[#FCFAF7] px-4 text-sm text-[#292722] outline-none transition focus:border-[#95271D] focus:ring-2 focus:ring-[#95271D]/10"
+                className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
               />
             </div>
 
@@ -175,7 +175,7 @@ function CreateTrip() {
               name="travelers"
               value={formData.travelers}
               onChange={handleChange}
-              className="h-12 w-full rounded-xl border border-[#DED5C9] bg-[#FCFAF7] px-4 text-sm text-[#292722] outline-none transition focus:border-[#95271D] focus:ring-2 focus:ring-[#95271D]/10"
+              className="h-12 w-full rounded-xl border border-[#DED5C9] bg-white px-4 text-sm text-[#292722] outline-none transition focus:border-[#118AB2] focus:ring-2 focus:ring-[#118AB2]/10"
             >
               <option value="1">1 Traveler</option>
               <option value="2">2 Travelers</option>
@@ -188,7 +188,7 @@ function CreateTrip() {
 
           {/* Message */}
           {message && (
-            <p className="mt-6 rounded-xl bg-[#F7F3EC] px-4 py-3 text-center text-sm font-medium text-[#95271D]">
+            <p className="mt-6 rounded-xl border border-[#D9BDA5] bg-[#EBD2BE] px-4 py-3 text-center text-sm font-medium text-[#80563F]">
               {message}
             </p>
           )}
@@ -198,14 +198,15 @@ function CreateTrip() {
 
             <button
               type="button"
-              className="rounded-xl border border-[#DED5C9] px-6 py-3 text-sm font-semibold text-[#6F6A61] transition hover:border-[#BDB4A8] hover:bg-[#F7F3EC]"
+              onClick={() => navigate('/trips')}
+              className="rounded-xl border border-[#DED5C9] bg-white px-6 py-3 text-sm font-semibold text-[#6F6A61] transition hover:border-[#BDB4A8] hover:bg-[#F7F3EC]"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="rounded-xl bg-[#95271D] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#7D2018] hover:shadow-lg"
+              className="rounded-xl bg-[#118AB2] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0D6F91] hover:shadow-lg"
             >
               Create Trip
             </button>
@@ -220,3 +221,4 @@ function CreateTrip() {
 }
 
 export default CreateTrip
+
