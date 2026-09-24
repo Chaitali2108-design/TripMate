@@ -94,8 +94,9 @@ function CreateTrip() {
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="mt-10 rounded-3xl border border-[#DED5C9] bg-[#FCFAF7] p-7 shadow-[0_20px_60px_rgba(41,39,34,0.08)] sm:p-9"
-        >
+    
+  className="mt-10 rounded-3xl border border-[#BCCDB1] bg-[#E4EBDD] p-7 shadow-[0_20px_60px_rgba(41,39,34,0.08)] sm:p-9"
+>
 
           {/* Form Grid */}
           <div className="grid gap-6 sm:grid-cols-2">
