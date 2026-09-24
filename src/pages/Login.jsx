@@ -53,7 +53,7 @@ function Login() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-73px)] bg-[#F7F6F2] px-6 py-16">
+    <main className="min-h-screen bg-transparent px-6 py-16">
       <div className="mx-auto max-w-md">
 
         {/* Header */}
@@ -76,7 +76,7 @@ function Login() {
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="rounded-[1.75rem] border border-[#E5E2DB] bg-white p-8 shadow-[0_20px_60px_rgba(41,39,34,0.07)]"
+          className="rounded-[1.75rem] border border-[#D8E3E6] bg-white/90 p-8 shadow-[0_20px_60px_rgba(17,138,178,0.10)] backdrop-blur-sm"
         >
 
           {/* Email */}
@@ -153,3 +153,4 @@ function Login() {
 }
 
 export default Login
+
