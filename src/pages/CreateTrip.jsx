@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -100,7 +101,7 @@ function CreateTrip() {
           <div className="grid gap-6 sm:grid-cols-2">
 
             {/* Trip Name */}
-            <div className="sm:col-span-2">
+            <div>
               <label className="mb-2 block text-sm font-medium text-[#292722]">
                 Trip Name
               </label>
@@ -117,7 +118,7 @@ function CreateTrip() {
             </div>
 
             {/* Destination */}
-            <div className="sm:col-span-2">
+            <div>
               <label className="mb-2 block text-sm font-medium text-[#292722]">
                 Destination
               </label>
