@@ -77,7 +77,7 @@ function DestinationDetails() {
           ← Back to Trip
         </Link>
 
-        <div className="mt-8 rounded-3xl border border-[#C8D5C1] bg-[#E4EBDD] p-8 shadow-[0_20px_60px_rgba(41,39,34,0.08)]">
+       <div className="mt-8 rounded-3xl border border-[#C8D8DE] bg-[#EAF3F5] p-8 shadow-[0_20px_45px_rgba(41,39,34,0.22)] sm:p-10">
 
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#617653]">
             Destination
