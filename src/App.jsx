@@ -9,6 +9,7 @@ import Trips from './pages/Trips'
 import CreateTrip from './pages/CreateTrip'
 import TripDetails from './pages/TripDetails'
 import EditTrip from './pages/EditTrip'
+import DestinationDetails from './pages/DestinationDetails'
 
 function AppLayout({ children }) {
   return (
@@ -61,6 +62,15 @@ function App() {
   element={
     <AppLayout>
       <TripDetails />
+    </AppLayout>
+  }
+/>
+
+<Route
+  path="/trips/:tripId/destinations/:destinationId"
+  element={
+    <AppLayout>
+      <DestinationDetails />
     </AppLayout>
   }
 />
