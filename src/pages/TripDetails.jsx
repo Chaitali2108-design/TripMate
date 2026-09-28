@@ -446,55 +446,64 @@ function TripDetails() {
                 <div className="mt-6 space-y-4">
 
                   {destinations.map((destination, index) => (
-                    <article
-                      key={destination.id}
-                      className="rounded-xl border border-[#E6DED3] bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
-                    >
+  <article
+    key={destination.id}
+    className="rounded-xl border border-[#E6DED3] bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+  >
 
-                      <div className="flex items-start justify-between gap-4">
+    <div className="flex items-start justify-between gap-4">
 
-                        <div className="flex gap-4">
+      {/* Clickable Destination */}
+      <Link
+        to={`/trips/${tripId}/destinations/${destination.id}`}
+        className="flex min-w-0 flex-1 gap-4 rounded-lg outline-none"
+      >
 
-                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#E6F5F8] text-sm font-semibold text-[#118AB2]">
-                            {index + 1}
-                          </span>
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#E6F5F8] text-sm font-semibold text-[#118AB2]">
+          {index + 1}
+        </span>
 
-                          <div>
+        <div className="min-w-0">
 
-                            <h4 className="text-lg font-semibold text-[#292722]">
-                              {destination.place_name}
-                            </h4>
+          <h4 className="text-lg font-semibold text-[#292722] transition-colors hover:text-[#118AB2]">
+            {destination.place_name}
+          </h4>
 
-                            {destination.description && (
-                              <p className="mt-1 text-sm leading-6 text-[#6F6A61]">
-                                {destination.description}
-                              </p>
-                            )}
+          {destination.description && (
+            <p className="mt-1 text-sm leading-6 text-[#6F6A61]">
+              {destination.description}
+            </p>
+          )}
 
-                            {destination.visit_date && (
-                              <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-[#118AB2]">
-                                {formatDate(destination.visit_date)}
-                              </p>
-                            )}
+          {destination.visit_date && (
+            <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-[#118AB2]">
+              {formatDate(destination.visit_date)}
+            </p>
+          )}
 
-                          </div>
+          <p className="mt-3 text-xs font-medium text-[#8A857C]">
+            View activities →
+          </p>
 
-                        </div>
+        </div>
 
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleDeleteDestination(destination.id)
-                          }
-                          className="shrink-0 text-xs font-semibold text-[#8B3A32] transition-colors hover:text-[#6F2D27]"
-                        >
-                          Delete
-                        </button>
+      </Link>
 
-                      </div>
+      {/* Delete */}
+      <button
+        type="button"
+        onClick={() =>
+          handleDeleteDestination(destination.id)
+        }
+        className="shrink-0 text-xs font-semibold text-[#8B3A32] transition-colors hover:text-[#6F2D27]"
+      >
+        Delete
+      </button>
 
-                    </article>
-                  ))}
+    </div>
+
+  </article>
+))}
 
                 </div>
               ) : (
