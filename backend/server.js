@@ -403,6 +403,123 @@ app.delete("/api/destinations/:destinationId", (req, res) => {
   });
 });
 
+// Add activity to a destination
+app.post("/api/destinations/:destinationId/activities", (req, res) => {
+  const destinationId = req.params.destinationId;
+
+  const {
+    activity_name,
+    description,
+    activity_date,
+    start_time,
+    end_time,
+    estimated_cost,
+  } = req.body;
+
+  const sql = `
+    INSERT INTO activities
+    (
+      destination_id,
+      activity_name,
+      description,
+      activity_date,
+      start_time,
+      end_time,
+      estimated_cost
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  db.query(
+    sql,
+    [
+      destinationId,
+      activity_name,
+      description,
+      activity_date,
+      start_time,
+      end_time,
+      estimated_cost,
+    ],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+
+        return res.status(500).json({
+          message: "Failed to add activity",
+        });
+      }
+
+      res.status(201).json({
+        message: "Activity added successfully!",
+        activityId: result.insertId,
+      });
+    },
+  );
+});
+
+// Get activities for a destination
+app.get("/api/destinations/:destinationId/activities", (req, res) => {
+  const destinationId = req.params.destinationId;
+
+  const sql = `
+    SELECT
+      id,
+      activity_name,
+      description,
+      activity_date,
+      start_time,
+      end_time,
+      estimated_cost,
+      created_at
+    FROM activities
+    WHERE destination_id = ?
+    ORDER BY activity_date ASC, start_time ASC
+  `;
+
+  db.query(sql, [destinationId], (err, results) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        message: "Failed to fetch activities",
+      });
+    }
+
+    res.json(results);
+  });
+});
+
+// Delete activity
+app.delete("/api/activities/:activityId", (req, res) => {
+  const activityId = req.params.activityId;
+
+  const sql = `
+    DELETE FROM activities
+    WHERE id = ?
+  `;
+
+  db.query(sql, [activityId], (err, result) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        message: "Failed to delete activity",
+      });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        message: "Activity not found",
+      });
+    }
+
+    res.json({
+      message: "Activity deleted successfully!",
+    });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
