@@ -481,8 +481,51 @@ function TripDetails() {
 
             {destinations.length > 0 ? (
              
+
 <div className="relative mt-6">
+  {/* Curved route lines — shown on larger screens */}
+  {destinations.length > 1 && (
+    <svg
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 hidden h-full w-full sm:block"
+      viewBox="0 0 1000 500"
+      preserveAspectRatio="none"
+    >
+      {/* Destination 1 → Destination 2 */}
+      <path
+        d="M 440 65 C 475 65, 525 65, 560 65"
+        fill="none"
+        stroke="#9BCBD6"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* Destination 2 → Destination 3 */}
+      {destinations.length > 2 && (
+        <path
+          d="M 780 105 C 780 145, 780 165, 780 205"
+          fill="none"
+          stroke="#9BCBD6"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+      )}
+
+      {/* Destination 3 → Destination 4 */}
+      {destinations.length > 3 && (
+        <path
+          d="M 560 250 C 525 250, 475 250, 440 250"
+          fill="none"
+          stroke="#9BCBD6"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+      )}
+    </svg>
+  )}
+
   <div className="relative grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2">
+    {/* Keep your existing destinations.map(...) here */}
     {destinations.map((destination, index) => {
       // Place destination 3 beside destination 4,
       // with destination 4 below destination 1.
