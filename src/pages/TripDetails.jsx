@@ -460,6 +460,7 @@ function TripDetails() {
             </div>
           )}
 
+
           {/* Current Destinations - Full Width */}
           <div className="mt-8 rounded-2xl border border-[#E6DED3] bg-[#FCFAF7] p-6">
             <div className="flex items-center justify-between">
@@ -479,55 +480,69 @@ function TripDetails() {
             </div>
 
             {destinations.length > 0 ? (
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                {destinations.map((destination, index) => (
-                  <article
-                    key={destination.id}
-                    className="rounded-xl border border-[#E6DED3] bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <Link
-                        to={`/trips/${tripId}/destinations/${destination.id}`}
-                        className="flex min-w-0 flex-1 gap-4 rounded-lg outline-none"
-                      >
-                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#E6F5F8] text-sm font-semibold text-[#118AB2]">
-                          {index + 1}
-                        </span>
+             
+<div className="relative mt-6">
+  <div className="relative grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2">
+    {destinations.map((destination, index) => {
+      // Place destination 3 beside destination 4,
+      // with destination 4 below destination 1.
+      const cardPosition =
+        index === 2
+          ? 'sm:col-start-2 sm:row-start-2'
+          : index === 3
+            ? 'sm:col-start-1 sm:row-start-2'
+            : ''
 
-                        <div className="min-w-0">
-                          <h4 className="text-lg font-semibold text-[#292722] transition-colors hover:text-[#118AB2]">
-                            {destination.place_name}
-                          </h4>
+      return (
+        <article
+          key={destination.id}
+          className={`relative z-10 rounded-xl border border-[#D8E5E7] bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-5 ${cardPosition}`}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <Link
+              to={`/trips/${tripId}/destinations/${destination.id}`}
+              className="flex min-w-0 flex-1 gap-3 rounded-lg outline-none"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-[#9BCBD6] bg-[#E6F5F8] text-sm font-semibold text-[#118AB2]">
+                {index + 1}
+              </span>
 
-                          {destination.description && (
-                            <p className="mt-1 text-sm leading-6 text-[#6F6A61]">
-                              {destination.description}
-                            </p>
-                          )}
+              <div className="min-w-0">
+                <h4 className="break-words text-base font-semibold text-[#292722] transition-colors hover:text-[#118AB2]">
+                  {destination.place_name}
+                </h4>
 
-                          {destination.visit_date && (
-                            <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-[#118AB2]">
-                              {formatDate(destination.visit_date)}
-                            </p>
-                          )}
+                {destination.description && (
+                  <p className="mt-1 text-sm leading-5 text-[#6F6A61]">
+                    {destination.description}
+                  </p>
+                )}
 
-                          <p className="mt-3 text-xs font-medium text-[#8A857C]">
-                            View activities →
-                          </p>
-                        </div>
-                      </Link>
+                {destination.visit_date && (
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-[#118AB2]">
+                    {formatDate(destination.visit_date)}
+                  </p>
+                )}
 
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteDestination(destination.id)}
-                        className="shrink-0 text-xs font-semibold text-[#8B3A32] transition-colors hover:text-[#6F2D27]"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </article>
-                ))}
+                <p className="mt-3 text-xs font-medium text-[#8A857C]">
+                  View activities →
+                </p>
               </div>
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => handleDeleteDestination(destination.id)}
+              className="shrink-0 text-xs font-semibold text-[#8B3A32] transition-colors hover:text-[#6F2D27]"
+            >
+              Delete
+            </button>
+          </div>
+        </article>
+      )
+    })}
+  </div>
+</div>
             ) : (
               <div className="mt-6 rounded-xl border border-dashed border-[#DED5C9] bg-white px-6 py-12 text-center">
                 <p className="text-sm font-medium text-[#292722]">
@@ -540,6 +555,7 @@ function TripDetails() {
               </div>
             )}
           </div>
+
         </section>
       </div>
     </main>
