@@ -524,7 +524,8 @@ function TripDetails() {
     </svg>
   )}
 
-  <div className="relative grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2">
+ 
+<div className="relative grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2 lg:gap-x-8">
     {/* Keep your existing destinations.map(...) here */}
     {destinations.map((destination, index) => {
       // Place destination 3 beside destination 4,
@@ -539,7 +540,8 @@ function TripDetails() {
       return (
         <article
           key={destination.id}
-          className={`relative z-10 rounded-xl border border-[#D8E5E7] bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-5 ${cardPosition}`}
+          
+className={`relative z-10 w-full max-w-sm justify-self-center rounded-xl border border-[#D8E5E7] bg-white p-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${cardPosition}`}
         >
           <div className="flex items-start justify-between gap-3">
             <Link
